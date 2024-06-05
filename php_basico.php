@@ -1,5 +1,8 @@
 <?php
+#declare(strict_types = 1); //usado para obrigar a receber os valores de acordo com o definido.
+declare(strict_types=1);
 
+#tipos de exibição de conteudo: echo, print, print_r, var_dump
 echo "ola mundo";
 
 #comentarios: #, //, /* */
@@ -83,3 +86,63 @@ do{
 } while($i < 5);
 
 #funções
+function escreveMensagem(string $nome, string $sobrenome = "Teixeira") : string { //default como Teixeira
+    return "mensagem do " . $nome . $sobrenome . PHP_EOL; 
+}
+
+$mensagem = escreveMensagem("caio", "teixeira");
+echo $mensagem;
+
+#splat operator "..." na funçao:
+function soma(int ...$numeros) {
+    echo array_sum($numeros) . PHP_EOL;
+    print_r($numeros) . PHP_EOL; #ou var_dump
+}
+
+soma(1,2,3,4);
+
+#nullable types: "?"
+function sub(int $num, ?int $num2) : ?int {
+    return $num - $num2;
+}
+
+print(sub(4,2) . PHP_EOL);
+print(sub(4,null) . PHP_EOL); #result = 4
+
+#passagem por referencia: &
+function mult($num, &$num2) {
+    $num2 += 2; #afeta o valor do $z pois faz referencia para ele.
+    return $num * $num2;
+}
+
+$z = 3;
+$result = mult(3, $z);
+print($result . PHP_EOL);
+print($z . PHP_EOL); 
+
+#função anonima
+$x = function($txt) {
+    echo "hello $txt" . PHP_EOL;
+};
+$x("world");
+//não consegue imprimir uma variavel de fora lá dentro da função.
+//para isso, precisa utilizar: function($txt) use ($x) {} para ter acesso ao $x dentro dela.
+$x = function($txt, $y) {
+    echo "hello $txt" . $y() . PHP_EOL;
+};
+$x("world", function(){return 5;});
+
+#constantes:
+define("MINHA_CONSTANTE", "nunca vai mudar");
+// define("OUTRA_CONSTANTE", "Não importa o case", true);
+define("PI", 3.1415);
+echo MINHA_CONSTANTE;
+
+#date: função nativa do PHP
+date_default_timezone_set('America/Sao_Paulo');
+//data
+echo date("d") .PHP_EOL;
+echo date("d/m/y") .PHP_EOL;
+//hora
+echo date("h:i:s") .PHP_EOL;
+echo date("d/m/y h:i:s") .PHP_EOL; //combinando data e hora
