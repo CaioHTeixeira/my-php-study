@@ -218,3 +218,43 @@ print_r(array_map(function ($x) { //com função anonima
 
 print_r($array); //não alterou
 
+#array_filter: filtra elementos e retorna o valor
+function count_maior_que_4 ($item) {
+    print($item);
+    return strlen($item) >= 4; 
+}
+
+print_r(array_filter($array, 'count_maior_que_4'));
+
+#compact: é utilizado para "empacotar" variáveis em um array
+$a = 1; $b = 4; $c = "caio"; $d = true;
+$result = compact("a", "b", "c", "d"); //cria um vetor com chaves a, b, c, d e seus respectivos valores.
+print_r($result);
+
+#list: desempacota(lista) as variaveis 
+$info = ['camiseta', 'Azul', 32.23];
+list($produto, $modelo, $preco) = $info; //cria as variaveis com os valores do array
+print($produto . PHP_EOL);
+
+#array_column: lista as colunas do array(chave-valor)
+$array3 = [
+    [   
+        "nome" => "caio",
+        "idade" => 28
+    ],
+    [   
+        "nome" => "igor",
+        "idade" => 27
+    ]
+];
+$nomes = array_column($array3, 'nome');
+print_r($nomes);
+
+#array_push 
+$nomes = ['maria', 'joao'];
+array_push($nomes, 'caio', 'igor');
+print_r($nomes);
+
+#array_pop
+array_pop($nomes);
+print_r($nomes);
