@@ -68,7 +68,7 @@ switch($tem_saldo) {
         echo "\nnão é 0 nem 1";
 }
 
-#estrutura laço(loop): for, while
+#estrutura laço(loop): for, while, do-while, foreach
 for($i=0; $i <= 10; $i++) {
     echo $i . PHP_EOL;
 }
@@ -84,6 +84,16 @@ do{
     print("oi" . PHP_EOL);
     $i++;
 } while($i < 5);
+
+$array = ["caio",2,3,true,5];
+foreach($array as $arr) {
+    print($arr . PHP_EOL);
+}
+
+$array2 = [1=>"maria", 2=>"joão", 'valor'=>2, null=>3.5];
+foreach($array2 as $key => $value) {
+    print("$key - $value" .PHP_EOL);
+}
 
 #funções
 function escreveMensagem(string $nome, string $sobrenome = "Teixeira") : string { //default como Teixeira
@@ -146,3 +156,65 @@ echo date("d/m/y") .PHP_EOL;
 //hora
 echo date("h:i:s") .PHP_EOL;
 echo date("d/m/y h:i:s") .PHP_EOL; //combinando data e hora
+
+#Array
+$array = array("maria", "joão", 2, 3.5);
+$array = ["maria", "joão", 2, 3.5];
+print_r($array);
+$array2 = [1=>"maria", 2=>"joão", 'valor'=>2, null=>3.5];
+echo $array2['valor'] . "\n";
+echo count($array2) .PHP_EOL;
+
+#Debug: print_r, var_dump, var_export
+//print_r: para imprimir um array
+//var_dump: mais detalhado que o print_r, n importa o valor, preciso debugar
+//var_export: parecido com print_r porem coloca valores extras em elementos null/false
+
+#ordenação de array: sort(ordem crescente), rsort(ordem decrescente), 
+   //asort(ordem crescente array associativo), arsort(ordem decrescente array associativo) ->fazem a ordenação pelo valor tbm em hash.
+   //ksort(ordem crescente pela chave), krsort(ordem decrescente pela chave)
+sort($array);
+var_dump($array);
+
+asort($array2);
+var_dump($array2);
+
+arsort($array2);
+var_dump($array2);
+
+ksort($array2);
+var_dump($array2);
+krsort($array2);
+var_dump($array2);
+
+#array para string (implode):
+$texto = implode(", ", $array);
+echo $texto .PHP_EOL;
+
+#string para array (explode):
+$arr = explode(",", $texto);
+print_r($arr);
+
+#verifica se existe item no array
+if (in_array("maria", $array)) {
+    echo "maria no array\n" ;
+}
+
+#verifica se chave existe no array
+if (array_key_exists("valor", $array2)) {
+    echo "chave existe \n";
+}
+
+#array_map: transforma o array, não altera o array original.
+$array = ['PHP', 'Array', 'funções'];
+function hashtag($x) {
+    return "#".$x;
+}
+print_r(array_map('hashtag', $array)); //sem função anonima
+
+print_r(array_map(function ($x) { //com função anonima
+    return "#".$x;
+}, $array));
+
+print_r($array); //não alterou
+
