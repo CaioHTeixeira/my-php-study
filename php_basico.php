@@ -258,3 +258,7 @@ print_r($nomes);
 #array_pop
 array_pop($nomes);
 print_r($nomes);
+
+#array_shift
+array_shift($nomes);
+print_r($nomes);
