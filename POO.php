@@ -118,3 +118,16 @@ class Filho2 extends Pai2 {
 }
 
 #classe abstrata
+abstract class Cartao {
+    public $nome;
+}
+
+class CartaoCredito extends Cartao {
+    public $parcelas;
+}
+
+class CartaoDebito extends Cartao {
+    public $valor;
+}
+
+$cartaoCredito = new CartaoCredito();
