@@ -120,14 +120,80 @@ class Filho2 extends Pai2 {
 #classe abstrata
 abstract class Cartao {
     public $nome;
+    abstract function exibirDocumento();
 }
 
 class CartaoCredito extends Cartao {
     public $parcelas;
+
+    function exibirDocumento() { //metodos abstratos precisam ser implementados nas classes filhas.
+        echo "documento credito\n";
+    }
 }
 
 class CartaoDebito extends Cartao {
     public $valor;
+
+    function exibirDocumento() {
+        echo "documento debito\n";
+    }
 }
 
 $cartaoCredito = new CartaoCredito();
+$cartaoDebito = new CartaoDebito();
+
+// $cartao = new Cartao(); //erro
+$cartaoCredito->exibirDocumento();
+
+#interface
+interface CartaoImp {
+    public function exibirCartao();
+}
+
+interface CartaoExtrato {
+    public function exibeExtrato();
+}
+
+class Cartao2 implements CartaoImp, CartaoExtrato {
+    function exibirCartao() {
+        echo "meu cartão implementado\n";
+    }
+
+    function exibeExtrato() {
+        echo "meu extrato\n";
+    }
+}
+
+$cartao2 = new Cartao2();
+$cartao2->exibirCartao();
+$cartao2->exibeExtrato();
+
+#trait: mecanismos para reutilização de código em linguagens de heranças multiplas, como PHP.
+//aplicação de membros de classes sem exigir herança.
+trait MinhaTrait {
+    public function oi() {
+        echo "oi\n";
+    }
+}
+trait MinhaTrait2 {
+    public function oi() {
+        echo "oi2\n";
+    }
+}
+class Test {
+    use MinhaTrait;
+} 
+
+$t1 = new Test();
+$t1->oi();
+
+class Test2 {
+    use MinhaTrait, MinhaTrait2 {
+        MinhaTrait2::oi insteadof MinhaTrait; //Pega o oi() de MinhaTrait2 em vez de MinhaTrait 
+        MinhaTrait2::oi as oi2; //chama o oi() de oi2().
+    }
+} 
+
+$test2 = new Test2();
+$test2->oi2();
+
