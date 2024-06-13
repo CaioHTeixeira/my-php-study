@@ -275,3 +275,36 @@ $filme2 = new Filme();
 $filme1->atuacoes[] = new Atuacao($ator1, $filme1, "Mocinho");
 $filme1->atuacoes[] = new Atuacao($ator2, $filme1, "Donzela");
 var_dump($filme1->atuacoes);
+
+#autoload(carregamento automático de classe): interessante usar qdo trabalhar com mais de uma classe, trait ou interface, carregando
+//automaticamente as estruturas em seus respectivos arquivos .php.
+//possui 2 funções de registro automático: __autoload() que foi depreciado(em 7.2+) e o spl_autoload_register();
+//spl_autoload_register(): permite q varios carregadores automaticos sejam registrados, q serao executados ate q uma classe, interf ou trait 
+//seja localizada e carregada.
+// function meu_autoloader($class) { //deu pau
+//     echo "chamando a classe" . $class;
+//     include_once 'classes/' . $class . '.php'; //criaria uma pasta classes com as classes Computador e Radio nela
+// }
+
+// spl_autoload_register('meu_autoloader');
+
+// $c1 = new Computador();
+// $r1 = new Radio();
+
+#reflection: auxilia a criar bibliotecas genéricas p exibir dados, processar diferentes formatos, realizar serialização, agrupar dados..
+//pode ser usado para observar e modificar a exec do prog em tempo de execução.
+
+class Animal {}
+class Felino extends Animal {}
+class Gato extends Felino {}
+
+$classe = new ReflectionClass(Gato::class);
+while ($parent = $classe->getParentClass()) {
+    $parents[] = $parent->getName();
+    $classe = $parent;
+}
+
+var_dump($parents);
+
+//obs: é possivel mudar a visibilidade de atributos e metodos com o reflection tbm.
+//tambem tem como pegar as propriedades de uma classe, ou só as públicas por exemplo.
