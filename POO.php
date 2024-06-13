@@ -197,3 +197,81 @@ class Test2 {
 $test2 = new Test2();
 $test2->oi2();
 
+#classe anonima
+$pessoa = new class {
+    public $nome = "caio";
+    public $cpf = 123;
+
+    public function getNome() {
+        return strtoupper($this->nome);
+    }
+};
+
+var_dump($pessoa->getNome());
+
+#associação entre objetos: 1 Pessoa possuir 0 ou 1 veiculos:
+class Person {
+    public $nome;
+    public $veiculo;
+}
+class Veiculo {
+    public $placa;
+    public $modelo;
+}
+
+$p1 = new Person();
+$p1->nome = "caio";
+
+$v1 = new Veiculo();
+$v1->placa = "ABC 123\n";
+
+$p1->veiculo = $v1;
+echo $p1->veiculo->placa;
+
+#composição: é um tipo de associação onde o objeto composto é o único responsável pela disposição das partes componentes.
+//o relacionamento entre o composto e o componente é um relacionamento forte "tem um", pois o objeto composto apropria-se do componente.
+//a composição impõe o encapsulamento e ela é caracterizada na UML pelo uso do losango preenchido.
+//se tirar o todo as partes deixam de existir.
+
+#agregação: é um tipo de associação que especifica um relacionamento de tod / parte entre a parte agregada(todo) e o componente.
+//esse relacionamento é um "tem um" fraco, pois o componente pode sobreviver ao objeto agregado.
+//é o losango em vazio no UML.
+
+#associação(1..*): 1 do lado esquerdo tem zero ou mais do direito.
+//Para representar essa relação podemos utilizar uma coleção(ex: array) para "armazenar" / "intermediar" esta relação.
+
+#classe associativa: é uma classe que faz parte de um relacionamento de associação entre duas outras classes.
+class Ator {
+    public $nome;
+    public $atuacoes = [];
+}
+
+class Atuacao {
+    public $ator;
+    public $filme;
+    public $papel;
+
+    public function __construct(Ator $ator, Filme $filme, string $papel) {
+        $this->ator = $ator;
+        $this->filme = $filme;
+        $this->papel = $papel;
+    }
+}
+
+class Filme {
+    public $titulo;
+    public $atuacoes = [];
+}
+
+$ator1 = new Ator();
+$ator1->nome = "caio";
+$ator2 = new Ator();
+$ator2->nome = "maria";
+
+$filme1 = new Filme();
+$filme1->titulo = "007";
+$filme2 = new Filme();
+
+$filme1->atuacoes[] = new Atuacao($ator1, $filme1, "Mocinho");
+$filme1->atuacoes[] = new Atuacao($ator2, $filme1, "Donzela");
+var_dump($filme1->atuacoes);
