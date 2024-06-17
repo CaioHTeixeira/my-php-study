@@ -340,3 +340,76 @@ var_dump($manga1);
 var_dump($manga2);
 var_dump($conto);
 
+#iterator
+class People {
+    public $nome = "caio";
+    private $cpf = "22222222";
+    protected $idade = 28;
+
+    public function iterar () {
+        foreach($this as $key => $value) {
+            echo "$key - $value" . PHP_EOL;
+        }
+    }
+}
+
+$people = new People();
+$people->iterar();
+
+//o iterator implementa a classe default do PHP '\Iterator'
+// class Fibonacci implements \Iterator {} //possui as funções: current(), key(), next(), rewind() e valid() q devem ser implementadas.
+
+#Generator
+function meuGenerator() {
+    echo "Um". PHP_EOL;
+    yield 1;
+    echo "Dois". PHP_EOL;
+    yield 2;
+    echo "Três". PHP_EOL;
+    yield 3;
+}
+
+$iterator = meuGenerator();
+$value = $iterator->current();
+$value = $iterator->next();
+$value = $iterator->next();
+
+#Iterator to array: a função iterator_to_array() converte um objeto iterável em array.
+
+#Date time: a classe tem métodos que permitem realizar operações com data e hora. Ela é uma classe.
+date_default_timezone_set('America/Sao_Paulo'); //usado para definir o padrão de hora de acordo com um local.
+echo date_default_timezone_get(). PHP_EOL;
+
+$dateTime = new DateTime('2024-01-31');
+echo $dateTime->format('Y-m-d H:i:s') . PHP_EOL; //H maiusculo é formato 24 hrs, minusculo é 12 hrs.
+
+$dateTimeAgora = new DateTime();
+echo $dateTimeAgora->format('Y-m-d H:i:s') . PHP_EOL;
+
+$dateTimeSp = new DateTime("", new DateTimeZone('America/Sao_Paulo')); //trabalha com a data atual e o fuso horário SP.
+var_dump($dateTimeSp);
+
+#create from format: define um tipo de formato especifico a ser seguido.
+$dateBr = DateTime::createFromFormat('d/m/Y', '31/12/2024');
+echo $dateBr->format('d/m/Y') .PHP_EOL;
+
+#modify: modifica a data atraves de string.
+$dateBr->modify('+1 day');
+$dateBr->modify('+10 weekdays'); //+10 dias da semana, exceto sab e dom.
+echo $dateBr->format('d/m/Y') .PHP_EOL;
+
+#diff: diferença entre duas datas.
+$interval = $dateTimeAgora->diff($dateTime);
+echo "Anos: $interval->y, Meses: $interval->m, dias: $interval->d, horas: $interval->h, minutos: $interval->i, segundos: $interval->s \n";
+
+#operações de comparação com datas:
+echo (new DateTime('today') > new DateTime('yesterday')) .PHP_EOL;
+echo (new DateTime('today') == new DateTime('yesterday')) .PHP_EOL;
+
+//Typed properties (PHP 7.4+): Usado para definir tipo para as variáveis, restringindo seus valores. 
+
+#declare(strict_types = 1); //usado para definir que será fortemente tipado os tipos.
+//Se for = 0 ele tentará fazer a conversão dos valores mesmo que não sejam dos tipos originais definidos!
+//OBS: Ele precisa ser a primeira parte do codigo(topo).
+
+#TypeCast: conversão explicita de tipo.
