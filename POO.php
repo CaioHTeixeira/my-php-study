@@ -1,4 +1,5 @@
 <?php
+// namespace Modelo;
 
 class Pessoa {
     public $nome;
@@ -298,7 +299,7 @@ class Animal {}
 class Felino extends Animal {}
 class Gato extends Felino {}
 
-$classe = new ReflectionClass(Gato::class);
+$classe = new ReflectionClass(Gato::class); 
 while ($parent = $classe->getParentClass()) {
     $parents[] = $parent->getName();
     $classe = $parent;
@@ -308,3 +309,34 @@ var_dump($parents);
 
 //obs: é possivel mudar a visibilidade de atributos e metodos com o reflection tbm.
 //tambem tem como pegar as propriedades de uma classe, ou só as públicas por exemplo.
+
+//*getDocComment(): para pegar o comentario e documentação de um método.
+
+#namespace: são uma maneira de organizar as classes PHP e evitar conflito de código;
+//é possível referenciar usando o "use" para evitar escrever o namespace completo novamente;
+//apelidos e conflitos podem ser resolvidos com o uso do "as".
+//OBS: ELE PRECISA SER A PRIMEIRA COISA NO CÓDIGO.
+class Produto {}
+
+// require "Modelo/Fruta/Manga.php"; //não precisa pois já tem o 'use'.
+// require "Modelo/Literatura/Manga.php";
+// require "Modelo/Literatura/Conto.php";
+
+// $manga1 = new Modelo\Fruta\Manga(); //pode usar o "use" para simplificar o caminho do fully qualified name.
+// $manga2 = new Modelo\Literatura\Manga();
+
+#autoload + namespace:
+require_once('autoload.php');
+
+use Modelo\Fruta\Manga as MangaFruta;
+// use Modelo\Literatura\Manga as MangaLiteratura;
+use Modelo\Literatura\{Manga as MangaLiteratura, Conto}; //Group use PHP 7+
+
+$manga1 = new MangaFruta(); 
+$manga2 = new MangaLiteratura();
+$conto = new Conto();
+
+var_dump($manga1);
+var_dump($manga2);
+var_dump($conto);
+
