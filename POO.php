@@ -412,4 +412,17 @@ echo (new DateTime('today') == new DateTime('yesterday')) .PHP_EOL;
 //Se for = 0 ele tentará fazer a conversão dos valores mesmo que não sejam dos tipos originais definidos!
 //OBS: Ele precisa ser a primeira parte do codigo(topo).
 
+#StdClass: classe nativa com propósito de ser uma classe para objetos frutos de coerção.
+$objeto = new StdClass();
+$objeto->nome = "caio";
+var_dump($objeto);
+
+$json = '{"nome": "caio", "idade": 28}';
+$objeto2 = json_decode($json); //tipo vai ser StdClass tbm.
+var_dump($objeto2);
 #TypeCast: conversão explicita de tipo.
+
+#input de dados:
+echo "digite seu nome: ";
+$nome = fgets(STDIN);
+echo "bem vindo $nome";
