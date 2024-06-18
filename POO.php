@@ -426,3 +426,8 @@ var_dump($objeto2);
 echo "digite seu nome: ";
 $nome = fgets(STDIN);
 echo "bem vindo $nome";
+
+#Variáveis HTTP: $_GET: array de variaveis com os parametros da URL; 
+//$_POST: array de variaveis com valores enviados do HTTP POST, $_REQUEST, $_FILES.
+//$_REQUEST: por default possui o conteúdo de $_GET e $_POST e $_COOKIE.
+//$_FILES: array de arquivos enviados via HTTTP POST.
