@@ -6,7 +6,7 @@
     <title>Meu formulario</title>
 </head>
 <body>
-    <form action="Cadastrar.html" method="POST">
+    <form action="Cadastrar.php" method="POST">
         <label>Nome: </label>
         <input type="text" name="nome"/>
         <label>Email:</label>
