@@ -5,6 +5,6 @@
     </head>
     <body>
         <div id="mensagem"></div>
-        <button onclick="meuAjax()">Ver Mensagem</button>
+        <button onclick="meuFetch()">Ver Mensagem</button>
     </body>
 </html>
