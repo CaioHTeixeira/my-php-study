@@ -66,4 +66,4 @@ function selectEstados(fonte_id, alvo_id) {
 }
 
 const select = document.getElementById('regioes');
-        select.addEventListener('change', selectEstados.bind(this, 'regioes', 'estados')); 
+select.addEventListener('change', selectEstados.bind(this, 'regioes', 'estados')); 

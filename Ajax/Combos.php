@@ -14,6 +14,6 @@
         <label>Estado: </label>
         <select id="estados"></select>
     </form>
-    <script src="Curso.js"></script>
+    <script src="Curso.js"></script> <!-- só funciona se for aqui no final ou com o defer no <head> --> 
 </body>
 </html>
